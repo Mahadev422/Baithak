@@ -45,7 +45,7 @@ const AllProducts = () => {
 
   return (
     <div className="p-4">
-      <div className="mb-8 flex gap-3 overflow-x-auto">
+      <div className="mb-8 flex gap-3 overflow-x-auto remove-scrollbar">
         <button
           onClick={() => setSelectedCategory(null)}
           className={`px-4 py-2 rounded ${
@@ -75,11 +75,11 @@ const AllProducts = () => {
           <h2 className="text-2xl font-semibold mb-4 text-gray-700">
             {cat.name}
           </h2>
-          <div className="flex overflow-y-auto remove-scrollbar gap-6">
+          <div className="flex overflow-y-auto remove-scrollbar gap-5">
             {cat.products.map((prod) => (
               <div
                 key={prod.id}
-                className="flex-1 min-w-[320px] bg-gray-100 rounded-lg shadow p-6 flex flex-col items-center hover:shadow-lg transition"
+                className="flex-1 min-w-[310px] bg-gray-100 rounded-lg shadow p-6 flex flex-col items-center hover:shadow-lg transition"
               >
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl font-bold">
                   {prod.name[0]}
