@@ -18,7 +18,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="w-full static top-0 flex items-center justify-between px-6 py-4 bg-white shadow">
+    <header className="w-full fixed h-[50px] z-100 top-0 flex items-center justify-between px-6 py-4 bg-white shadow">
       {/* Left: App Name */}
       <h1 className="text-xl font-bold text-gray-800">Baithak</h1>
       {/* Right: Icons */}

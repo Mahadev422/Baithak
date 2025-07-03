@@ -1,1 +1,9 @@
 @import 'tailwindcss';
+
+.remove-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+body::-webkit-scrollbar {
+    display: none; /* Firefox */
+}
