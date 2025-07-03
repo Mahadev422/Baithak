@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="min-h-screen min-w-screen remove-scrollbar">
       <Header />
-      <main className="mt-13">
+      <main className="mt-15">
         <Outlet />
       </main>
       <Footer />

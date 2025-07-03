@@ -1,13 +1,21 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./routes/App";
 import Home from "./routes/Home";
+import UserProfile from "./routes/UserProfile";
+import CartPage from "./routes/CartPage";
+import Orders from "./routes/Orders";
+import Settings from "./routes/Settings";
+import Notifications from "./routes/Notifications";
+import LoginPage from "./routes/LoginPage";
 
 export const Router = createBrowserRouter([
-    {
-        path: "/",
-        element: <App />,
-        children: [
-            {index: true, element: <Home />},
-        ]
-    },
+  { path: "/", element: <App />, children: [
+      { index: true, element: <Home /> },
+      { path: "profile", element: <UserProfile /> },
+      { path: "cart", element: <CartPage /> },
+      { path: "orders", element: <Orders /> },
+      { path: "settings", element: <Settings /> },
+      { path: "notifications", element: <Notifications /> },
+    ]},
+    {path: 'login', element: <LoginPage />},
 ]);

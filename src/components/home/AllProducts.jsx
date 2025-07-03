@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 // Dummy data
 const categories = [
@@ -8,10 +9,10 @@ const categories = [
     products: [
       { id: 101, name: "Smartphone", price: 299 },
       { id: 102, name: "Laptop", price: 799 },
-      { id: 101, name: "Smartphone", price: 299 },
-      { id: 102, name: "Laptop", price: 799 },
-      { id: 101, name: "Smartphone", price: 299 },
-      { id: 102, name: "Laptop", price: 799 },
+      { id: 103, name: "Smartphone", price: 299 },
+      { id: 104, name: "Laptop", price: 799 },
+      { id: 105, name: "Smartphone", price: 299 },
+      { id: 106, name: "Laptop", price: 799 },
     ],
   },
   {
@@ -72,25 +73,43 @@ const AllProducts = () => {
       </div>
       {displayedCategories.map((cat) => (
         <div key={cat.id} className="mb-10">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-700">
-            {cat.name}
-          </h2>
-          <div className="flex overflow-y-auto remove-scrollbar gap-5">
+          <span className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-semibold text-gray-700">{cat.name}</h2>
+            <Link className="text-sm text-blue-600 p-1 px-2 rounded hover:bg-blue-200">
+              View All
+            </Link>
+          </span>
+
+          <div className="flex overflow-y-auto remove-scrollbar gap-3">
             {cat.products.map((prod) => (
-              <div
-                key={prod.id}
-                className="flex-1 min-w-[310px] bg-gray-100 rounded-lg shadow p-6 flex flex-col items-center hover:shadow-lg transition"
-              >
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl font-bold">
-                  {prod.name[0]}
+              <div className="flex flex-1 min-w-[310px] border border-gray-200 rounded-lg shadow-md font-sans">
+                <div className="p-1 items-center justify-center">
+                  <img
+                    src="https://lh6.googleusercontent.com/proxy/1o41SnAPq3W6JDr0tByD1Lg2zpp7x1ozBPwcXF9zi4YF0yHey3ha4Sn8wJnoYBp3AZ7CSF7bsodrfQcXDLFbcf2k8IF2zZ-tcPlnObgInCXwgmS1OSRPWVkYp79sHBaL0GfrqtNesq3-D5OCOQ"
+                    alt="Product Image"
+                    className="w-full"
+                  />
                 </div>
-                <div className="text-lg font-medium text-gray-800 mb-2">
-                  {prod.name}
+
+                <div className="flex-1 p-5 flex flex-col justify-between">
+                  <div>
+                    <h2 className="m-0 mb-2 font-semibold text-gray-800">
+                      Premium Wireless Headphones
+                    </h2>
+                    <div className="flex items-center mb-2">
+                      <span className="text-xl font-bold text-gray-900">
+                        $199.99
+                      </span>
+                      <span className="ml-2 text-red-600 font-bold bg-red-100 px-2 py-0.5 rounded text-sm">
+                        25% OFF
+                      </span>
+                    </div>
+                  </div>
+
+                  <button className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors duration-200 self-start">
+                    View Details
+                  </button>
                 </div>
-                <div className="text-gray-500 mb-4">${prod.price}</div>
-                <button className="mt-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-                  View Details
-                </button>
               </div>
             ))}
           </div>
