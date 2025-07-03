@@ -79,7 +79,7 @@ const AllProducts = () => {
             {cat.products.map((prod) => (
               <div
                 key={prod.id}
-                className="flex-1 min-w-[350px] bg-gray-100 rounded-lg shadow p-6 flex flex-col items-center hover:shadow-lg transition"
+                className="flex-1 min-w-[320px] bg-gray-100 rounded-lg shadow p-6 flex flex-col items-center hover:shadow-lg transition"
               >
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl font-bold">
                   {prod.name[0]}
