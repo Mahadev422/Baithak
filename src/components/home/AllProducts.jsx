@@ -8,6 +8,10 @@ const categories = [
     products: [
       { id: 101, name: "Smartphone", price: 299 },
       { id: 102, name: "Laptop", price: 799 },
+      { id: 101, name: "Smartphone", price: 299 },
+      { id: 102, name: "Laptop", price: 799 },
+      { id: 101, name: "Smartphone", price: 299 },
+      { id: 102, name: "Laptop", price: 799 },
     ],
   },
   {
@@ -40,7 +44,7 @@ const AllProducts = () => {
     : categories;
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
+    <div className="p-4">
       <div className="mb-8 flex gap-3 overflow-x-auto">
         <button
           onClick={() => setSelectedCategory(null)}
@@ -75,7 +79,7 @@ const AllProducts = () => {
             {cat.products.map((prod) => (
               <div
                 key={prod.id}
-                className="flex-1 bg-white rounded-lg shadow p-6 flex flex-col items-center hover:shadow-lg transition"
+                className="flex-1 min-w-[350px] bg-white rounded-lg shadow p-6 flex flex-col items-center hover:shadow-lg transition"
               >
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl font-bold">
                   {prod.name[0]}
