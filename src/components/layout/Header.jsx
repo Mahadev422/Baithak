@@ -22,7 +22,7 @@ const Header = () => {
     <header className="w-full fixed h-[56px] z-50 top-0 flex items-center justify-between px-2 bg-white shadow-md">
       {/* Left: App Name */}
       <Link to="/">
-      <h1 className="text-2xl font-extrabold text-blue-700 tracking-wide select-none">Baithak</h1>
+      <img className="h-[50px] rounded-full p-1" src="/baithak-icon.jpg" alt="dfs" />
       </Link>
       {/* Right: Icons */}
       <div className="flex items-center gap-1">
