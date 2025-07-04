@@ -16,11 +16,6 @@ const mockProduct = {
     "https://nobero.com/cdn/shop/files/og.jpg?v=1744007258",
     "https://chriscross.in/cdn/shop/files/ChrisCrossRoyalblueCottontshirtmen.jpg?v=1740994595",
   ],
-  brand: {
-    name: "SoundMax Pro",
-    logo: "https://via.placeholder.com/150x50?text=SoundMax",
-    info: "Award-winning audio brand since 2010",
-  },
   category: "Electronics",
   rating: 4.7,
   reviews: 328,

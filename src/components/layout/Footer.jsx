@@ -6,7 +6,7 @@ const Footer = () => (
       <div className="flex-1 min-w-[220px] m-4">
         <h3 className="text-2xl font-extrabold mb-3 tracking-wide">Baithak</h3>
         <p className="text-sm text-gray-300">
-          &copy; {new Date().getFullYear()} ShopName. All rights reserved.
+          &copy; {new Date().getFullYear()} Baithak. All rights reserved.
         </p>
       </div>
       <div className="flex-1 min-w-[170px] m-4">

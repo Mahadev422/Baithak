@@ -28,7 +28,7 @@ const QuantitySelect = ({ setQuantity, quantity}) => {
           />
           <button
             onClick={() =>
-              setQuantity(quantity + 1)
+              setQuantity(Math.min(4,quantity + 1))
             }
             className="p-2 bg-gray-100 rounded-r-md text-gray-600 hover:bg-gray-200"
           >
