@@ -7,6 +7,7 @@ import Orders from "./routes/Orders";
 import Settings from "./routes/Settings";
 import Notifications from "./routes/Notifications";
 import LoginPage from "./routes/LoginPage";
+import Signup from "./routes/Signup";
 
 export const Router = createBrowserRouter([
   { path: "/", element: <App />, children: [
@@ -18,4 +19,5 @@ export const Router = createBrowserRouter([
       { path: "notifications", element: <Notifications /> },
     ]},
     {path: 'login', element: <LoginPage />},
+    {path: 'signup', element: <Signup />}
 ]);

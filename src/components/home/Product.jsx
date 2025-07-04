@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Product = () => {
   const product = {
     id: 1,
@@ -18,12 +20,12 @@ const Product = () => {
   );
 
   return (
-    <div className="flex-1 min-w-[310px] max-w-xs border border-gray-200 rounded-xl shadow-lg font-sans bg-white hover:shadow-xl transition-shadow duration-300">
-      <div className="p-4 flex items-center justify-center bg-gray-50 rounded-t-xl">
+    <div className="flex-1 min-w-[310px] max-w-xs border border-gray-200 rounded-xl font-sans hover:shadow-xl transition-shadow duration-300">
+      <div className="p-2 flex items-center justify-center">
         <img
           src={product.imageUrl}
           alt={product.name}
-          className="w-40 h-40 object-cover rounded-lg"
+          className="h-50 object-cover rounded-lg"
         />
       </div>
       <div className="px-5 pt-3 pb-5 flex flex-col gap-2">
@@ -31,11 +33,11 @@ const Product = () => {
           {[1, 2, 3, 4, 5].map((i) => (
             <span
               key={i}
-              className={
+              className={`text-2xl ${
                 i <= Math.floor(product.rating)
                   ? "text-yellow-400"
                   : "text-gray-300"
-              }
+              }`}
             >
               ★
             </span>
@@ -54,9 +56,12 @@ const Product = () => {
             ₹ {product.price}
           </span>
         </div>
-        <button className="mt-3 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition-colors">
+        <Link
+          to="#"
+          className="bg-green-600 hover:bg-green-700 text-white font-semibold p-2 text-center rounded-lg transition-colors"
+        >
           View Details
-        </button>
+        </Link>
       </div>
     </div>
   );
