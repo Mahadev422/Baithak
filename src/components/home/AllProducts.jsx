@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Product from "./Product";
 
 // Dummy data
 const categories = [
@@ -82,34 +83,8 @@ const AllProducts = () => {
 
           <div className="flex overflow-y-auto remove-scrollbar gap-3">
             {cat.products.map((prod) => (
-              <div className="flex flex-1 min-w-[310px] border border-gray-200 rounded-lg shadow-md font-sans">
-                <div className="p-1 items-center justify-center">
-                  <img
-                    src="https://lh6.googleusercontent.com/proxy/1o41SnAPq3W6JDr0tByD1Lg2zpp7x1ozBPwcXF9zi4YF0yHey3ha4Sn8wJnoYBp3AZ7CSF7bsodrfQcXDLFbcf2k8IF2zZ-tcPlnObgInCXwgmS1OSRPWVkYp79sHBaL0GfrqtNesq3-D5OCOQ"
-                    alt="Product Image"
-                    className="w-full"
-                  />
-                </div>
-
-                <div className="flex-1 p-5 flex flex-col justify-between">
-                  <div>
-                    <h2 className="m-0 mb-2 font-semibold text-gray-800">
-                      Premium Wireless Headphones
-                    </h2>
-                    <div className="flex items-center mb-2">
-                      <span className="text-xl font-bold text-gray-900">
-                        $199.99
-                      </span>
-                      <span className="ml-2 text-red-600 font-bold bg-red-100 px-2 py-0.5 rounded text-sm">
-                        25% OFF
-                      </span>
-                    </div>
-                  </div>
-
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors duration-200 self-start">
-                    View Details
-                  </button>
-                </div>
+              <div key={prod.id}>    
+              <Product />
               </div>
             ))}
           </div>

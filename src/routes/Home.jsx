@@ -1,5 +1,5 @@
-import AllProducts from '../components/home/AllProducts'
-import SlidingPage from '../components/home/SlidingPage'
+import AllProducts from '../components/home/AllProducts';
+import SlidingPage from '../components/home/SlidingPage';
 
 const Home = () => {
   return (
