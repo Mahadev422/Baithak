@@ -57,7 +57,7 @@ const Product = () => {
           </span>
         </div>
         <Link
-          to="#"
+          to="1"
           className="bg-green-600 hover:bg-green-700 text-white font-semibold p-2 text-center rounded-lg transition-colors"
         >
           View Details
