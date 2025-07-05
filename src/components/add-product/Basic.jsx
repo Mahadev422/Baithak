@@ -8,7 +8,7 @@ const categories = [
   "Toys",
   "Other",
 ];
-const Basic = ({ product, handleChange, errors}) => {
+const Basic = ({ product, handleChange, errors }) => {
   return (
     <section>
       <h2 className="text-lg font-semibold text-blue-800 mb-4 flex items-center gap-2">

@@ -11,6 +11,7 @@ import Signup from "./routes/Signup";
 import ProductProfile from "./routes/ProductProfile";
 import Wishlist from "./routes/Wishlist";
 import ProductForm from "./routes/admin/ProductForm";
+import ProductLists from "./routes/product-list/ProductLists";
 
 export const Router = createBrowserRouter([
   { path: "/", element: <App />, children: [
@@ -22,6 +23,10 @@ export const Router = createBrowserRouter([
       { path: "notifications", element: <Notifications /> },
       { path: "/1", element: <ProductProfile />},
       { path: "wishlists", element: <Wishlist /> },
+      { path: "products", element: <ProductLists />, children: [
+        { index: true, element: <div>All</div> },
+        { path: ':category', element: <div>Category</div> },
+      ]}
     ]},
     { path: 'login', element: <LoginPage />},
     { path: 'signup', element: <Signup />},

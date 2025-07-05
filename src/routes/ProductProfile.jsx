@@ -8,8 +8,8 @@ const mockProduct = {
   name: "Wireless Noise-Cancelling Headphones",
   description:
     "Premium wireless headphones with active noise cancellation, 30 hours battery life, and premium sound quality. Perfect for travel and daily use.",
-  price: 199.99,
-  originalPrice: 249.99,
+  price: 199,
+  originalPrice: 249,
   images: [
     "https://img-c.udemycdn.com/course/750x422/5444528_d4e3_5.jpg",
     "https://d2fy0k1bcbbnwr.cloudfront.net/Designs_Inners_and_Outers/Tshirts/Men/tshirt_hs_men_pat_d48_o.jpg",
@@ -20,11 +20,6 @@ const mockProduct = {
   rating: 4.7,
   reviews: 328,
   stock: 15,
-  colors: [
-    { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-    { name: "Silver", class: "bg-gray-300", selectedClass: "ring-gray-300" },
-    { name: "Blue", class: "bg-blue-500", selectedClass: "ring-blue-500" },
-  ],
   sizes: [
     { name: "Small", inStock: true },
     { name: "Medium", inStock: true },
@@ -38,7 +33,6 @@ const mockProduct = {
 
 const ProductProfile = () => {
   const [quantity, setQuantity] = useState(1);
-  const [selectedColor, setSelectedColor] = useState(mockProduct.colors[0]);
 
   const handleAddToCart = () => {
     alert(
@@ -98,11 +92,11 @@ const ProductProfile = () => {
             <div className="space-y-2">
               <div className="flex items-center gap-4">
                 <p className="text-3xl font-bold text-gray-900">
-                  ${mockProduct.price.toFixed(2)}
+                  ₹{mockProduct.price.toFixed(2)}
                 </p>
                 {mockProduct.originalPrice && (
                   <p className="text-lg text-gray-500 line-through">
-                    ${mockProduct.originalPrice.toFixed(2)}
+                    ₹{mockProduct.originalPrice.toFixed(2)}
                   </p>
                 )}
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -136,7 +130,7 @@ const ProductProfile = () => {
             <p className="text-gray-700">{mockProduct.description}</p>
 
             {/* Color Selector */}
-            <div>
+          {/* <div>
               <h3 className="text-sm font-medium text-gray-900">
                 Color: <span className="font-normal">{selectedColor.name}</span>
               </h3>
@@ -159,7 +153,7 @@ const ProductProfile = () => {
                   </button>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Size Selector */}
             <SizeSelect sizes={mockProduct.sizes} />

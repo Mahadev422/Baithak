@@ -1,11 +1,13 @@
-import { useState, useCallback } from "react";
-import { useDropzone } from "react-dropzone";
+import { useState } from "react";
 import ImageUpload from "../../components/add-product/ImageUpload";
 import Rating from "../../components/add-product/Rating";
 import Pricing from "../../components/add-product/Pricing";
 import Basic from "../../components/add-product/Basic";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../store/fetch/addProduct";
 
-const ProductForm = ({ onSubmit }) => {
+const ProductForm = () => {
+  const dispatch = useDispatch();
   const [product, setProduct] = useState({
     name: "",
     description: "",
@@ -13,9 +15,18 @@ const ProductForm = ({ onSubmit }) => {
     originalPrice: "",
     images: [],
     category: "",
-    rating: "",
-    reviews: "",
+    rating: 0,
+    reviews: 0,
     stock: "",
+    sizes: [
+      { name: "Small", inStock: true },
+      { name: "Medium", inStock: true },
+      { name: "Large", inStock: false },
+    ],
+    deliveryInfo: {
+      freeDelivery: true,
+      fastDelivery: true,
+    },
   });
   const [errors, setErrors] = useState({});
   const [isUploading, setIsUploading] = useState(false);
@@ -37,8 +48,23 @@ const ProductForm = ({ onSubmit }) => {
     if (!product.price || isNaN(product.price))
       newErrors.price = "Valid price is required";
     if (!product.category) newErrors.category = "Category is required";
-    if (product.images.length === 0)
-      newErrors.images = "At least one image is required";
+    // if (product.images.length === 0)
+    //   newErrors.images = "At least one image is required";
+
+    // Integer validation for reviews and stock
+    if (
+      product.reviews &&
+      (!Number.isInteger(Number(product.reviews)) ||
+        Number(product.reviews) < 0)
+    ) {
+      newErrors.reviews = "Reviews must be a non-negative integer";
+    }
+    if (
+      product.stock &&
+      (!Number.isInteger(Number(product.stock)) || Number(product.stock) < 0)
+    ) {
+      newErrors.stock = "Stock must be a non-negative integer";
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -57,27 +83,47 @@ const ProductForm = ({ onSubmit }) => {
         reviews: parseInt(product.reviews) || 0,
         stock: parseInt(product.stock) || 0,
       };
-
-      onSubmit(formattedProduct);
+      console.log("Product submitted:");
+      console.log(formattedProduct);
+      dispatch(addProduct(formattedProduct));
+      setProduct({
+        name: "",
+        description: "",
+        price: "",
+        originalPrice: "",
+        images: [],
+        category: "",
+        rating: 0,
+        reviews: 0,
+        stock: "",
+        sizes: [
+          { name: "Small", inStock: true },
+          { name: "Medium", inStock: true },
+          { name: "Large", inStock: false },
+        ],
+        deliveryInfo: {
+          freeDelivery: true,
+          fastDelivery: true,
+        },
+      });
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto my-5 p-8 bg-gradient-to-br from-white via-blue-50 to-blue-100 rounded-2xl shadow-2xl border border-blue-100">
+    <div className="max-w-3xl mx-auto m-5 p-8 bg-gradient-to-br from-white via-blue-50 to-blue-100 rounded-2xl shadow-2xl border border-blue-100">
       <h1 className="text-3xl font-extrabold mb-8 text-blue-900 tracking-tight text-center">
         Add New Product
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Basic Information */}
-       <Basic
+        <Basic product={product} handleChange={handleChange} errors={errors} />
+
+        {/* Pricing */}
+        <Pricing
           product={product}
           handleChange={handleChange}
           errors={errors}
-        />
-
-        {/* Pricing */}
-        <Pricing product={product} handleChange={handleChange} errors={errors}
         />
 
         {/* Description */}
@@ -105,7 +151,12 @@ const ProductForm = ({ onSubmit }) => {
         </section>
 
         {/* Image Upload */}
-        <ImageUpload product={product} setProduct={setProduct} />
+        <ImageUpload
+          product={product}
+          setProduct={setProduct}
+          errors={errors}
+          setErrors={setErrors}
+        />
 
         {/* Ratings */}
         <Rating product={product} handleChange={handleChange} />

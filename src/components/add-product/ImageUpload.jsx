@@ -1,22 +1,21 @@
 import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
-const ImageUpload = ({ product, setProduct}) => {
+const ImageUpload = ({ product, setProduct, errors, setErrors }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
-  const [errors, setErrors] = useState({});
 
   const uploadToCloudinary = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "your_upload_preset"); // Replace with your upload preset
+    formData.append("upload_preset", "Baithak"); // Replace with your upload preset
 
     return new Promise(async (resolve, reject) => {
       try {
         const xhr = new XMLHttpRequest();
         xhr.open(
           "POST",
-          "https://api.cloudinary.com/v1_1/your_cloud_name/image/upload"
+          "https://api.cloudinary.com/v1_1/dpbwgyew7/image/upload"
         ); // Replace with your cloud name
 
         xhr.upload.onprogress = (event) => {
@@ -191,7 +190,7 @@ const ImageUpload = ({ product, setProduct}) => {
                   type="button"
                   onClick={() => handleRemoveImage(index)}
                   title="Remove image"
-                  className="absolute top-2 right-2 bg-white bg-opacity-80 hover:bg-red-500 hover:text-white text-red-500 rounded-full w-7 h-7 flex items-center justify-center shadow transition-all opacity-0 group-hover:opacity-100"
+                  className="absolute top-2 right-2 bg-white bg-opacity-80 hover:bg-red-500 hover:text-white text-red-500 rounded-full w-7 h-7 flex items-center justify-center shadow transition-all"
                 >
                   <svg
                     className="w-4 h-4"

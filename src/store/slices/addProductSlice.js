@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { imageToUrl } from "../fetch/addProduct";
+import { addProduct } from "../fetch/addProduct";
+import { getProducts } from "../fetch/addProduct";
 
 const initialState = {
   imageUrl: null,
   loading: false,
   error: null,
+  products: []
 };
 
 const addProductSlice = createSlice({
@@ -13,17 +15,30 @@ const addProductSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(imageToUrl.pending, (state) => {
+      .addCase(addProduct.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(imageToUrl.fulfilled, (state, action) => {
+      .addCase(addProduct.fulfilled, (state, action) => {
         state.loading = false;
-        state.imageUrl = action.payload;
+        console.log(action.payload); // Assuming the payload contains imageUrl
       })
-      .addCase(imageToUrl.rejected, (state, action) => {
+      .addCase(addProduct.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload || "Failed to add product";
+      });
+    builder
+      .addCase(getProducts.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getProducts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.products = action.payload;
+      })
+      .addCase(getProducts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Failed to fetch products";
       });
   },
 });

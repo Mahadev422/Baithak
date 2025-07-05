@@ -47,36 +47,11 @@ const AllProducts = () => {
 
   return (
     <div className="p-4">
-      <div className="mb-8 flex gap-3 overflow-x-auto remove-scrollbar">
-        <button
-          onClick={() => setSelectedCategory(null)}
-          className={`px-4 py-2 rounded ${
-            selectedCategory === null
-              ? "bg-blue-600 text-white font-semibold"
-              : "bg-white border border-gray-300 text-gray-700 hover:bg-blue-100"
-          }`}
-        >
-          All
-        </button>
-        {categories.map((cat) => (
-          <button
-            key={cat.id}
-            onClick={() => handleCategoryClick(cat.id)}
-            className={`px-4 py-2 rounded ${
-              selectedCategory === cat.id
-                ? "bg-blue-600 text-white font-semibold"
-                : "bg-white border border-gray-300 text-gray-700 hover:bg-blue-100"
-            }`}
-          >
-            {cat.name}
-          </button>
-        ))}
-      </div>
       {displayedCategories.map((cat) => (
         <div key={cat.id} className="mb-10">
           <span className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-semibold text-gray-700">{cat.name}</h2>
-            <Link className="text-sm text-blue-600 p-1 px-2 rounded hover:bg-blue-200">
+            <Link to={`products/${cat.name.toLocaleLowerCase()}`} className="text-sm text-blue-600 p-1 px-2 rounded hover:bg-blue-200">
               View All
             </Link>
           </span>
