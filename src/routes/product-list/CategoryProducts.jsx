@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Product from "../../components/home/Product";
+import Product from "../../components/Product";
 import { mockProducts } from "../../data";
 import { useParams } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import Product from "./Product";
+import Product from "../Product";
 import { mockProducts } from "../../data";
 
 const Category = ({ cat }) => {

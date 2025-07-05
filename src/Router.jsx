@@ -2,16 +2,16 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./routes/App";
 import Home from "./routes/Home";
 import UserDashboard from "./routes/account/UserDashboard";
-import CartPage from "./routes/CartPage";
+import CartPage from "./routes/account/CartPage";
 import Settings from "./routes/account/Settings";
 import Notifications from "./routes/Notifications";
 import LoginPage from "./routes/LoginPage";
 import Signup from "./routes/Signup";
 import ProductProfile from "./routes/ProductProfile";
-import Wishlist from "./routes/account/Wishlist";
+import Wishlists from "./routes/account/Wishlists";
 import ProductForm from "./routes/admin/ProductForm";
 import ProductLists from "./routes/product-list/ProductLists";
-import OrderHistory from "./routes/account/OrderHistory";
+import Orders from "./routes/account/Orders";
 import Profile from "./routes/account/Profile";
 
 export const Router = createBrowserRouter([
@@ -25,13 +25,12 @@ export const Router = createBrowserRouter([
         element: <UserDashboard />,
         children: [
           { index: true, element: <Profile /> },
-          { path: "profile", element: <Profile /> },
-          { path: "wishlist", element: <Wishlist /> },
-          { path: "orders", element: <OrderHistory /> },
-          { path: "settings", element: <Settings /> },
+          { path: "orders", element: <Orders /> },
         ],
       },
       { path: "cart", element: <CartPage /> },
+      { path: "wishlists", element: <Wishlists /> },
+      { path: "settings", element: <Settings />},
       { path: "notifications", element: <Notifications /> },
       { path: "/products/:category/:id", element: <ProductProfile /> },
       {
@@ -42,6 +41,7 @@ export const Router = createBrowserRouter([
           { path: ":category", element: <div>Category</div> },
         ],
       },
+      //{ path: 'extra', element: <ProfilePage />}
     ],
   },
   { path: "login", element: <LoginPage /> },

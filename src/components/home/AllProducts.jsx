@@ -1,7 +1,4 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Product from "./Product";
-import { mockProducts } from "../../data";
 import { categories } from "../../data";
 import Category from "./Category";
 

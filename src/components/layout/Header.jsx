@@ -58,15 +58,15 @@ const Header = () => {
           {dropdownOpen && (
             <div className="absolute right-0 mt-3 w-44 bg-white border border-blue-100 rounded-lg shadow-lg z-20 animate-fade-in">
               <ul className="py-2">
-                <li>
+                {['Account', 'Wishlists', 'Settings'].map((item) => <li>
                   <Link
                     onClick={() => setDropdownOpen(false)}
-                    to='account'
+                    to={item.toLowerCase()}
                     className="block px-5 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
                   >
-                    Account
+                    {item}
                   </Link>
-                </li>
+                </li>)}
                 <li>
                   <Link
                     to="/login"
