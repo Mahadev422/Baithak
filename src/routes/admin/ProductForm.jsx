@@ -48,10 +48,9 @@ const ProductForm = () => {
     if (!product.price || isNaN(product.price))
       newErrors.price = "Valid price is required";
     if (!product.category) newErrors.category = "Category is required";
-    // if (product.images.length === 0)
-    //   newErrors.images = "At least one image is required";
+    if (product.images.length === 0)
+      newErrors.images = "At least one image is required";
 
-    // Integer validation for reviews and stock
     if (
       product.reviews &&
       (!Number.isInteger(Number(product.reviews)) ||

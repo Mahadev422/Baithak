@@ -10,7 +10,7 @@ function App() {
   const { products, loading } = useSelector((state) => state.addProduct);
   useEffect(() => {
     dispatch(getProducts());
-    console.log(products);
+    //console.log(products);
   }, []);
   return (
     <div className="min-h-screen min-w-screen remove-scrollbar">

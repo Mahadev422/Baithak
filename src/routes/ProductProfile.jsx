@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import ImageGallery from "../components/product-profile/ImageGallery";
 import QuantitySelect from "../components/product-profile/QuantitySelect";
 import SizeSelect from "../components/product-profile/SizeSelect";
+import { useParams } from "react-router-dom";
 
 const mockProduct = {
   id: 1,
@@ -33,6 +34,9 @@ const mockProduct = {
 
 const ProductProfile = () => {
   const [quantity, setQuantity] = useState(1);
+  const { id } = useParams();
+
+  console.log("Product ID from URL:", id);
 
   const handleAddToCart = () => {
     alert(
@@ -100,7 +104,11 @@ const ProductProfile = () => {
                   </p>
                 )}
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                  {Math.round((mockProduct.originalPrice - mockProduct.price)*100/mockProduct.originalPrice)}% OFF
+                  {Math.round(
+                    ((mockProduct.originalPrice - mockProduct.price) * 100) /
+                      mockProduct.originalPrice
+                  )}
+                  % OFF
                 </span>
               </div>
 
@@ -125,35 +133,8 @@ const ProductProfile = () => {
                 )}
               </div>
             </div>
-
             {/* Description */}
             <p className="text-gray-700">{mockProduct.description}</p>
-
-            {/* Color Selector */}
-          {/* <div>
-              <h3 className="text-sm font-medium text-gray-900">
-                Color: <span className="font-normal">{selectedColor.name}</span>
-              </h3>
-              <div className="mt-2 flex items-center gap-3">
-                {mockProduct.colors.map((color) => (
-                  <button
-                    key={color.name}
-                    type="button"
-                    className={`h-8 w-8 rounded-full flex items-center justify-center ring-1 ring-offset-1 ${
-                      color.class
-                    } ${
-                      selectedColor.name === color.name
-                        ? color.selectedClass + " ring-2"
-                        : "ring-transparent"
-                    }`}
-                    onClick={() => setSelectedColor(color)}
-                    title={color.name}
-                  >
-                    <span className="sr-only">{color.name}</span>
-                  </button>
-                ))}
-              </div>
-            </div> */}
 
             {/* Size Selector */}
             <SizeSelect sizes={mockProduct.sizes} />

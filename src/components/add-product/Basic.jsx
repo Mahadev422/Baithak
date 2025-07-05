@@ -1,13 +1,5 @@
-const categories = [
-  "Electronics",
-  "Clothing",
-  "Home & Kitchen",
-  "Books",
-  "Beauty",
-  "Sports",
-  "Toys",
-  "Other",
-];
+import { categories } from "../../data";
+
 const Basic = ({ product, handleChange, errors }) => {
   return (
     <section>
@@ -49,8 +41,8 @@ const Basic = ({ product, handleChange, errors }) => {
           >
             <option value="">Select a category</option>
             {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
+              <option key={category.name} value={category.name}>
+                {category.name}
               </option>
             ))}
           </select>
