@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { checkAuthStatus, syncUserToFirestore } from "../fetch/auth";
+import {
+  addToUserArray,
+  checkAuthStatus,
+  getUserDetails,
+  syncUserToFirestore,
+} from "../fetch/auth";
 
 const authSlice = createSlice({
   name: "auth",
@@ -7,6 +12,7 @@ const authSlice = createSlice({
     user: null,
     loading: true,
     error: null,
+    userData: null,
   },
   reducers: {
     logout(state) {
@@ -23,17 +29,37 @@ const authSlice = createSlice({
       .addCase(checkAuthStatus.fulfilled, (state, action) => {
         state.user = action.payload;
         state.loading = false;
-        console.log(action.payload)
       })
       .addCase(checkAuthStatus.rejected, (state, action) => {
         state.user = null;
         state.loading = false;
         state.error = action.error.message;
       });
+    builder.addCase(syncUserToFirestore.rejected, (state, action) => {
+      console.error("User sync failed", action.payload);
+    });
     builder
-      .addCase(syncUserToFirestore.rejected, (state,action) => {
-        console.error('User sync failed', action.payload);
+      .addCase(getUserDetails.pending, (state) => {
+        //state.loading = true;
       })
+      .addCase(getUserDetails.fulfilled, (state, action) => {
+        state.userData = action.payload;
+      })
+      .addCase(getUserDetails.rejected, (state, action) => {
+        console.error("Error while fetching user", action.payload);
+      });
+    builder
+      .addCase(addToUserArray.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addToUserArray.fulfilled, (state, action) => {
+        state.loading = false;
+        console.log("Item added:", action.payload);
+      })
+      .addCase(addToUserArray.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 

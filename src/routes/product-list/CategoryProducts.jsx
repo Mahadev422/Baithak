@@ -2,19 +2,17 @@ import { useEffect, useState } from "react";
 import Product from "../../components/Product";
 import { mockProducts } from "../../data";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const CategoryPorducts = () => {
-  const [products, setProducts] = useState([]);
+  const { products, loading } = useSelector((state) => state.addProduct);
   const { category } = useParams();
-  console.log("Category from URL:", category);
 
-  useEffect(() => {
-    setProducts(mockProducts);
-  }, []);
-
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase()
-  );
+  if (loading) return <p>Loading...</p>;
+  
+  const filteredProducts = !category
+    ? products
+    : products.filter((product) => product.category.toLowerCase() === category);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

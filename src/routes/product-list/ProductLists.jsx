@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import CategoryPorducts from "./CategoryProducts";
-import { categories } from "../../data"; // Assuming you have a categories data file
+import { categories } from "../../data";
+
 const ProductLists = () => {
   const [search, setSearch] = useState("");
   const [activeCat, setActiveCat] = useState(null);
-  const {  category } = useParams();
+  const { category } = useParams();
 
   useEffect(() => {
     setActiveCat(category || "all");
-  },[category]);
+  }, [category]);
 
   return (
     <div className="p-3 md:p-5 lg:p-8 bg-gray-50 min-h-screen">

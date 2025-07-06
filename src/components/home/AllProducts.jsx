@@ -16,7 +16,7 @@ const AllProducts = () => {
           </span>
 
           <div className="flex flex-row overflow-x-auto remove-scrollbar gap-3">
-            <Category cat={cat.name} />
+            <Category cat={cat.name.toLowerCase()} />
           </div>
         </div>
       ))}

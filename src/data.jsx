@@ -23,7 +23,7 @@ export const mockProducts = [
   {
     id: 2,
     name: "Smart Watch",
-    category: "Shorts",
+    category: "Short",
     price: 129.99,
     image:
       "https://i.ibb.co/tTcYZwh2/Whats-App-Image-2025-07-04-at-09-50-43-c4e4c9ed.jpg",
@@ -32,7 +32,7 @@ export const mockProducts = [
   {
     id: 3,
     name: "Bluetooth Speaker",
-    category: "Shorts",
+    category: "Short",
     price: 39.99,
     image:
       "https://i.ibb.co/tTcYZwh2/Whats-App-Image-2025-07-04-at-09-50-43-c4e4c9ed.jpg",
@@ -41,7 +41,7 @@ export const mockProducts = [
   {
     id: 6,
     name: "Bluetooth Speaker",
-    category: "Shorts",
+    category: "Short",
     price: 39.99,
     image:
       "https://i.ibb.co/tTcYZwh2/Whats-App-Image-2025-07-04-at-09-50-43-c4e4c9ed.jpg",
@@ -50,7 +50,7 @@ export const mockProducts = [
   {
     id: 4,
     name: "Gaming Mouse",
-    category: "T-shirts",
+    category: "T-shirt",
     price: 24.99,
     image:
       "https://i.ibb.co/tTcYZwh2/Whats-App-Image-2025-07-04-at-09-50-43-c4e4c9ed.jpg",
@@ -60,11 +60,11 @@ export const mockProducts = [
 
 export const categories = [
   {
-    name: "T-shirts",
+    name: "T-shirt",
     img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=facearea&w=100&q=80",
   },
   {
-    name: "Shorts",
+    name: "Short",
     img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=facearea&w=100&q=80",
   },
   {
@@ -72,7 +72,7 @@ export const categories = [
     img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=facearea&w=100&q=80",
   },
   {
-    name: "Caps",
+    name: "Cap",
     img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=100&q=80",
   },
   {

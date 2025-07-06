@@ -1,28 +1,11 @@
 import { Link } from "react-router-dom";
 
 const Product = ({ product }) => {
-  // const product = {
-  //   id: 1,
-  //   name: "Premium Wireless Headphones",
-  //   price: 199.99,
-  //   category: "Electronics",
-  //   rating: 4.5,
-  //   discountPrice: 149.99,
-  //   description:
-  //     "Experience high-quality sound with our premium wireless headphones. Perfect for music lovers and audiophiles.",
-  //   imageUrl:
-  //     "https://i.ibb.co/tTcYZwh2/Whats-App-Image-2025-07-04-at-09-50-43-c4e4c9ed.jpg",
-  // };
-
-  // // Calculate discount percent
-  // const discountPercent = Math.round(
-  //   ((product.price - product.discountPrice) * 100) / product.price
-  // );
 
   return (
     <div className="bg-white rounded-xl shadow hover:shadow-lg transition-all duration-200 p-4 flex">
       <img
-        src={product.image}
+        src={product.images[0]}
         alt={product.name}
         className="w-24 h-24 object-cover rounded-lg mr-4"
       />

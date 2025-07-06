@@ -3,9 +3,6 @@ import productSlice from './slices/productSlice';
 import addProductSlice from './slices/addProductSlice';
 import authSlice from './slices/authSlice';
 
-// Example: import your reducers here
-// import userReducer from './userSlice';
-
 const store = configureStore({
     reducer: {
         product: productSlice,

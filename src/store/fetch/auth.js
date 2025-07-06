@@ -1,7 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { auth, db } from "../../../firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 
 // 🔄 Async thunk to listen to auth status
 export const checkAuthStatus = createAsyncThunk(
@@ -12,7 +19,7 @@ export const checkAuthStatus = createAsyncThunk(
         auth,
         (user) => {
           unsubscribe(); // only run once
-          resolve(user ? (user.uid) : null);
+          resolve(user ? user.uid : null);
         },
         (error) => {
           reject(error.message);
@@ -37,13 +44,55 @@ export const syncUserToFirestore = createAsyncThunk(
           createdAt: serverTimestamp(),
           wishlists: [],
           cartStore: [],
-          address: []
+          address: [],
+          phoneNumber: "",
         });
       }
 
       return "User synced";
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
+    }
+  }
+);
+
+export const getUserDetails = createAsyncThunk(
+  "auth/getUserById",
+  async (uid, { rejectWithValue }) => {
+    try {
+      const userRef = doc(db, "users", uid);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        const createdAt = userData.createdAt?.toDate?.() ?? null;
+        return {
+          id: userSnap.id,
+          ...userData,
+          createdAt: createdAt ? createdAt.toISOString() : null,
+        }; // ✅ user data
+      } else {
+        return rejectWithValue("User not found");
+      }
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const addToUserArray = createAsyncThunk(
+  "user/addToUserArray",
+  async ({ uid, field, item }, { rejectWithValue }) => {
+    try {
+      const userRef = doc(db, "users", uid);
+      await updateDoc(userRef, {
+        [field]: arrayUnion(item),
+      });
+      return { uid, field, item };
+    } catch (error) {
+      console.error("Error adding to array:", error);
+      return rejectWithValue(error.message);
     }
   }
 );

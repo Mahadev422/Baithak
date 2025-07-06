@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { MdEdit } from "react-icons/md";
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserDetails } from '../../store/fetch/auth';
 
 const UserDashboard = () => {
   const [activeTab, setActiveTab] = useState('personal-info');
   const location = useLocation()
   const path = location.pathname;
+  const { user, loading } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setActiveTab(path)
   },[path])
+
+  useEffect(() => {
+    dispatch(getUserDetails(user));
+  },[user])
 
   return (
     <div className="min-h-screen lg:mx-5 flex flex-col gap-5 lg:flex-row mx-auto px-4 sm:px-6 lg:px-8 py-8">

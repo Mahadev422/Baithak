@@ -1,42 +1,18 @@
-import React, { use, useState } from "react";
+import { useEffect, useState } from "react";
 import ImageGallery from "../components/product-profile/ImageGallery";
 import QuantitySelect from "../components/product-profile/QuantitySelect";
 import SizeSelect from "../components/product-profile/SizeSelect";
 import { useParams } from "react-router-dom";
-
-const mockProduct = {
-  id: 1,
-  name: "Wireless Noise-Cancelling Headphones",
-  description:
-    "Premium wireless headphones with active noise cancellation, 30 hours battery life, and premium sound quality. Perfect for travel and daily use.",
-  price: 199,
-  originalPrice: 249,
-  images: [
-    "https://img-c.udemycdn.com/course/750x422/5444528_d4e3_5.jpg",
-    "https://d2fy0k1bcbbnwr.cloudfront.net/Designs_Inners_and_Outers/Tshirts/Men/tshirt_hs_men_pat_d48_o.jpg",
-    "https://nobero.com/cdn/shop/files/og.jpg?v=1744007258",
-    "https://chriscross.in/cdn/shop/files/ChrisCrossRoyalblueCottontshirtmen.jpg?v=1740994595",
-  ],
-  category: "Electronics",
-  rating: 4.7,
-  reviews: 328,
-  stock: 15,
-  sizes: [
-    { name: "Small", inStock: true },
-    { name: "Medium", inStock: true },
-    { name: "Large", inStock: false },
-  ],
-  deliveryInfo: {
-    freeDelivery: true,
-    fastDelivery: true,
-  },
-};
+import { useDispatch, useSelector } from "react-redux";
+import { getProductById } from "../store/fetch/fetchProduct";
 
 const ProductProfile = () => {
   const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState(null);
   const { id } = useParams();
+  const dispatch = useDispatch();
 
-  console.log("Product ID from URL:", id);
+  const { products, loading } = useSelector(state => state.addProduct);
 
   const handleAddToCart = () => {
     alert(
@@ -49,12 +25,18 @@ const ProductProfile = () => {
       `Proceeding to checkout with ${quantity} ${selectedSize.name} ${selectedColor.name} ${mockProduct.name}!`
     );
   };
+  useEffect(() => {
+    const data = products.find(p => p.id == id);
+    setProduct(data)
+  },[products]);
+
+  if(!product) return <p>Loading...</p>
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Product Images */}
-        <ImageGallery images={mockProduct.images} />
+        <ImageGallery images={product.images} />
 
         {/* Product Details */}
         <div className="lg:w-1/2">
@@ -62,10 +44,10 @@ const ProductProfile = () => {
             {/* Product Title */}
             <div>
               <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-                {mockProduct.name}
+                {product.name}
               </h1>
               <p className="text-gray-500 text-sm mt-1">
-                {mockProduct.category}
+                {product.category}
               </p>
             </div>
 
@@ -76,7 +58,7 @@ const ProductProfile = () => {
                   <svg
                     key={rating}
                     className={`h-5 w-5 ${
-                      rating < mockProduct.rating
+                      rating < product.rating
                         ? "text-yellow-400"
                         : "text-gray-300"
                     }`}
@@ -88,7 +70,7 @@ const ProductProfile = () => {
                 ))}
               </div>
               <p className="text-sm text-gray-600">
-                {mockProduct.rating} ({mockProduct.reviews} reviews)
+                {product.rating} ({product.reviews} reviews)
               </p>
             </div>
 
@@ -96,17 +78,17 @@ const ProductProfile = () => {
             <div className="space-y-2">
               <div className="flex items-center gap-4">
                 <p className="text-3xl font-bold text-gray-900">
-                  ₹{mockProduct.price.toFixed(2)}
+                  ₹{product.price.toFixed(2)}
                 </p>
-                {mockProduct.originalPrice && (
+                {product.originalPrice && (
                   <p className="text-lg text-gray-500 line-through">
-                    ₹{mockProduct.originalPrice.toFixed(2)}
+                    ₹{product.originalPrice.toFixed(2)}
                   </p>
                 )}
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                   {Math.round(
-                    ((mockProduct.originalPrice - mockProduct.price) * 100) /
-                      mockProduct.originalPrice
+                    ((product.originalPrice - product.price) * 100) /
+                      product.originalPrice
                   )}
                   % OFF
                 </span>
@@ -114,7 +96,7 @@ const ProductProfile = () => {
 
               {/* Delivery Info */}
               <div className="space-y-1 text-sm">
-                {mockProduct.deliveryInfo.freeDelivery && (
+                {product.deliveryInfo.freeDelivery && (
                   <p className="text-green-600 flex items-center gap-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -134,10 +116,10 @@ const ProductProfile = () => {
               </div>
             </div>
             {/* Description */}
-            <p className="text-gray-700">{mockProduct.description}</p>
+            <p className="text-gray-700">{product.description}</p>
 
             {/* Size Selector */}
-            <SizeSelect sizes={mockProduct.sizes} />
+            <SizeSelect sizes={product.sizes} />
 
             {/* Quantity Selector */}
             <QuantitySelect setQuantity={setQuantity} quantity={quantity} />
@@ -146,10 +128,10 @@ const ProductProfile = () => {
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 type="button"
-                disabled={mockProduct.stock === 0}
+                disabled={product.stock === 0}
                 onClick={handleAddToCart}
                 className={`flex-1 py-3 px-8 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
-                  mockProduct.stock === 0
+                  product.stock === 0
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-indigo-600 hover:bg-indigo-700"
                 } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
@@ -158,10 +140,10 @@ const ProductProfile = () => {
               </button>
               <button
                 type="button"
-                disabled={mockProduct.stock === 0}
+                disabled={product.stock === 0}
                 onClick={handleBuyNow}
                 className={`flex-1 py-3 px-8 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
-                  mockProduct.stock === 0
+                  product.stock === 0
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-green-600 hover:bg-green-700"
                 } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500`}
