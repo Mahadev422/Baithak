@@ -4,11 +4,12 @@ import Header from "../components/layout/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProducts } from "../store/fetch/addProduct";
+import { checkAuthStatus } from "../store/fetch/auth";
 
 function App() {
   const dispatch = useDispatch();
-  const { products, loading } = useSelector((state) => state.addProduct);
   useEffect(() => {
+    dispatch(checkAuthStatus());
     dispatch(getProducts());
     //console.log(products);
   }, []);

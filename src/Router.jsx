@@ -5,14 +5,14 @@ import UserDashboard from "./routes/account/UserDashboard";
 import CartPage from "./routes/account/CartPage";
 import Settings from "./routes/account/Settings";
 import Notifications from "./routes/Notifications";
-import LoginPage from "./routes/LoginPage";
-import Signup from "./routes/Signup";
 import ProductProfile from "./routes/ProductProfile";
 import Wishlists from "./routes/account/Wishlists";
 import ProductForm from "./routes/admin/ProductForm";
 import ProductLists from "./routes/product-list/ProductLists";
 import Orders from "./routes/account/Orders";
 import Profile from "./routes/account/Profile";
+import SignIn from "./routes/authentication/SignIn";
+import ProtectedRoute from "./routes/authentication/ProtectedRoute"; // ✅ import
 
 export const Router = createBrowserRouter([
   {
@@ -20,18 +20,26 @@ export const Router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Home /> },
+
+      // 🔐 Protected Routes
       {
-        path: "account",
-        element: <UserDashboard />,
+        element: <ProtectedRoute />, // ✅ Wrap protected
         children: [
-          { index: true, element: <Profile /> },
-          { path: "orders", element: <Orders /> },
+          {
+            path: "account",
+            element: <UserDashboard />,
+            children: [
+              { index: true, element: <Profile /> },
+              { path: "orders", element: <Orders /> },
+            ],
+          },
+          { path: "cart", element: <CartPage /> },
+          { path: "wishlists", element: <Wishlists /> },
+          { path: "settings", element: <Settings /> },
+          { path: "notifications", element: <Notifications /> },
         ],
       },
-      { path: "cart", element: <CartPage /> },
-      { path: "wishlists", element: <Wishlists /> },
-      { path: "settings", element: <Settings />},
-      { path: "notifications", element: <Notifications /> },
+
       { path: "/products/:category/:id", element: <ProductProfile /> },
       {
         path: "products",
@@ -41,10 +49,12 @@ export const Router = createBrowserRouter([
           { path: ":category", element: <div>Category</div> },
         ],
       },
-      //{ path: 'extra', element: <ProfilePage />}
     ],
   },
-  { path: "login", element: <LoginPage /> },
-  { path: "signup", element: <Signup /> },
-  { path: "add-product", element: <ProductForm /> },
+
+  // 🔓 Public Routes
+  { path: "/sign-in", element: <SignIn /> },
+
+  // 🔐 Optional: Admin Route Guard
+  { path: "/admin/add-product", element: <ProductForm /> }, // You can wrap this too if needed
 ]);

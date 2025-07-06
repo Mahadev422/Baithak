@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 const ImageGallery = ({ images }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -19,12 +20,23 @@ const ImageGallery = ({ images }) => {
     <div className="lg:w-1/2">
       <div className="relative">
         {/* Main Image */}
-        <center>
+        <center className="relative">
           <img
             src={images[selectedImageIndex]}
             alt={`Image ${selectedImageIndex + 1}`}
             className="h-[400px] rounded-lg shadow-md"
           />
+          <div className="absolute top-2 right-4 text-3xl p-2 rounded-full">
+            {true ? (
+              <button className="h-5 w-5 text-red-500">
+                <FaHeart />
+              </button>
+            ) : (
+              <button className="h-5 w-5">
+                <FaRegHeart />
+              </button>
+            )}
+          </div>
         </center>
 
         {/* Navigation Arrows */}

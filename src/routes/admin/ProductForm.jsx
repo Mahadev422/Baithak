@@ -98,7 +98,7 @@ const ProductForm = () => {
         sizes: [
           { name: "Small", inStock: true },
           { name: "Medium", inStock: true },
-          { name: "Large", inStock: false },
+          { name: "Large", inStock: true },
         ],
         deliveryInfo: {
           freeDelivery: true,

@@ -56,7 +56,7 @@ const Product = ({ product }) => {
           </span>
           <Link
             to={`/products/${product.category.toLowerCase()}/${product.id}`}
-            className="bg-green-600 text-white px-4 py-1 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
+            className="bg-green-600 text-white px-4 py-1 rounded-lg text-sm font-medium hover:bg-green-700 transition"
           >
             View
           </Link>
