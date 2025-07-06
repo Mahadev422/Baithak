@@ -8,7 +8,7 @@ const UserDashboard = () => {
   const [activeTab, setActiveTab] = useState('personal-info');
   const location = useLocation()
   const path = location.pathname;
-  const { user, loading } = useSelector(state => state.auth);
+  const { user, userData, loading } = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const UserDashboard = () => {
            <MdEdit />
           </button>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800">John Doe</h1>
+        <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800">{userData?.displayName}</h1>
       </div>
 
       {/* Tabs Navigation */}

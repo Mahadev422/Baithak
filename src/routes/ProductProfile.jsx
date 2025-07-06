@@ -3,16 +3,14 @@ import ImageGallery from "../components/product-profile/ImageGallery";
 import QuantitySelect from "../components/product-profile/QuantitySelect";
 import SizeSelect from "../components/product-profile/SizeSelect";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductById } from "../store/fetch/fetchProduct";
+import { useSelector } from "react-redux";
 
 const ProductProfile = () => {
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState(null);
   const { id } = useParams();
-  const dispatch = useDispatch();
 
-  const { products, loading } = useSelector(state => state.addProduct);
+  const { products } = useSelector(state => state.addProduct);
 
   const handleAddToCart = () => {
     alert(
