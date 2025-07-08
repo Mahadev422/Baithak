@@ -7,7 +7,7 @@ import { getProducts } from "../store/fetch/addProduct";
 import { checkAuthStatus, getUserDetails } from "../store/fetch/auth";
 
 function App() {
-  const { user } = useSelector(state => state.auth);
+  const { user, loading } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(checkAuthStatus());
@@ -16,6 +16,7 @@ function App() {
   useEffect(() => {
     if(user) dispatch(getUserDetails(user));
   },[user])
+  if(loading) return <p>Loading...</p>
   return (
     <div className="min-h-screen min-w-screen bg-gray-100 remove-scrollbar">
       <Header />

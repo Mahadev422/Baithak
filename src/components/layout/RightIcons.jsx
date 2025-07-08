@@ -1,13 +1,14 @@
 import { signOut } from "firebase/auth";
 import { useEffect, useRef, useState } from "react";
 import { FaBell, FaCaretDown, FaCartPlus, FaUserCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { auth } from "../../../firebaseConfig";
 
 const RightIcons = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-
+  const location = useLocation();
+  const path = location.pathname;
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -22,9 +23,9 @@ const RightIcons = () => {
 
   const handleSignout = async () => {
     await signOut(auth);
-    window.location.href = '/';
-    alert('Successfully sign out!');
-  }
+    window.location.href = "/";
+    alert("Successfully sign out!");
+  };
   return (
     <div className="flex items-center gap-1">
       <Link
@@ -36,7 +37,7 @@ const RightIcons = () => {
       </Link>
       <Link
         to="/cart"
-        className="p-2 rounded-full hover:bg-blue-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-300"
+        className={`p-2 rounded-full ${path === '/cart' ? 'bg-blue-100' : ''} hover:bg-blue-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-300`}
         aria-label="Cart"
       >
         <FaCartPlus className="h-6 w-6" />
@@ -60,7 +61,7 @@ const RightIcons = () => {
                   <Link
                     onClick={() => setDropdownOpen(false)}
                     to={item.toLowerCase()}
-                    className="block px-5 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                    className={`block px-5 py-2 ${path === '/'+item.toLowerCase() ? 'bg-blue-100' : ''} text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors`}
                   >
                     {item}
                   </Link>

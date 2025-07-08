@@ -18,12 +18,7 @@ const authSlice = createSlice({
     cartStore: [],
     load: false,
   },
-  reducers: {
-    logout(state) {
-      state.user = null;
-      state.loading = false;
-    },
-  },
+  reducers: { },
   extraReducers: (builder) => {
     builder
       .addCase(checkAuthStatus.pending, (state) => {
@@ -32,7 +27,6 @@ const authSlice = createSlice({
       })
       .addCase(checkAuthStatus.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.wishlists = [];
         state.loading = false;
       })
       .addCase(checkAuthStatus.rejected, (state, action) => {
@@ -97,6 +91,7 @@ const authSlice = createSlice({
           default:
           // default code block
         }
+        console.log('Removed', action.payload)
       })
       .addCase(removeFromUserArray.rejected, (state, action) => {
         state.load = false;

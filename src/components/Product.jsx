@@ -12,7 +12,7 @@ const Product = ({ product }) => {
     ((product.originalPrice - product.price) * 100) / product.originalPrice;
 
   return (
-    <div className="bg-blue-50 hover:bg-blue-100 rounded-xl h-[150px] hover:shadow-lg transition-all relative duration-200 p-2 flex gap-3">
+    <div className="bg-white rounded-xl h-[150px] hover:shadow-lg transition-all relative duration-200 p-2 flex gap-3">
       <div className="absolute m-1 text-xl text-gray-800 hover:scale-[1.2] rounded-full p-1">
         {load ? (
           "..."

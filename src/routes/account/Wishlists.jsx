@@ -1,13 +1,22 @@
-const Wishlists = () => (
-  <div>
-    <h2 className="text-xl font-semibold text-gray-800 mb-4">Wishlist</h2>
-    <p className="text-gray-600">Your saved items.</p>
-    <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-      {[1, 2, 3, 4].map(item => (
-        <div>hii</div>
-      ))}
+import { useSelector } from "react-redux";
+import Product from "../../components/Product";
+const Wishlists = () => {
+  const { products, loading } = useSelector((state) => state.addProduct);
+  const { wishlists } = useSelector((state) => state.auth);
+
+  const wishlistItems = products.filter((item) => wishlists.includes(item.id));
+  console.log(products, wishlists);
+  if (!wishlistItems) return <p>Loading...</p>;
+  return (
+    <div className="px-2 sm:px-4 md:px-8">
+      <h2 className="text-xl font-semibold text-gray-800 mb-4">Wishlist</h2>
+      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {wishlistItems.map((item) => (
+          <Product key={item.id} product={item} />
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Wishlists;

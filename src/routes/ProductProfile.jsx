@@ -75,7 +75,7 @@ const ProductProfile = () => {
             <QuantitySelect setQuantity={setQuantity} quantity={quantity} />
 
             {/* Action Buttons */}
-            <BuyCart product={product} />
+            <BuyCart id={product.id} />
           </div>
         </div>
       </div>
