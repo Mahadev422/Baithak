@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { auth, db } from "../../../firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import {
+  arrayRemove,
   arrayUnion,
   doc,
   getDoc,
@@ -92,6 +93,22 @@ export const addToUserArray = createAsyncThunk(
       return { uid, field, item };
     } catch (error) {
       console.error("Error adding to array:", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const removeFromUserArray = createAsyncThunk(
+  "user/removeFromUserArray",
+  async ({ uid, field, item }, { rejectWithValue }) => {
+    try {
+      const userRef = doc(db, "users", uid);
+      await updateDoc(userRef, {
+        [field]: arrayRemove(item),
+      });
+      return { uid, field, item };
+    } catch (error) {
+      console.error("Error removing from array:", error);
       return rejectWithValue(error.message);
     }
   }

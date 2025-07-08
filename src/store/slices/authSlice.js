@@ -3,6 +3,7 @@ import {
   addToUserArray,
   checkAuthStatus,
   getUserDetails,
+  removeFromUserArray,
   syncUserToFirestore,
 } from "../fetch/auth";
 
@@ -10,9 +11,12 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: null,
-    loading: true,
+    loading: false,
     error: null,
     userData: null,
+    wishlists: [],
+    cartStore: [],
+    load: false,
   },
   reducers: {
     logout(state) {
@@ -28,6 +32,7 @@ const authSlice = createSlice({
       })
       .addCase(checkAuthStatus.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.wishlists = [];
         state.loading = false;
       })
       .addCase(checkAuthStatus.rejected, (state, action) => {
@@ -44,21 +49,57 @@ const authSlice = createSlice({
       })
       .addCase(getUserDetails.fulfilled, (state, action) => {
         state.userData = action.payload;
+        state.wishlists = action.payload.wishlists;
+        state.cartStore = action.payload.cartStore;
       })
       .addCase(getUserDetails.rejected, (state, action) => {
         console.error("Error while fetching user", action.payload);
       });
+    // add or remove
     builder
       .addCase(addToUserArray.pending, (state) => {
-        state.loading = true;
+        state.load = true;
       })
       .addCase(addToUserArray.fulfilled, (state, action) => {
-        state.loading = false;
-        console.log("Item added:", action.payload);
+        state.load = false;
+        const { field, item } = action.payload;
+        switch (field) {
+          case "wishlists":
+            state.wishlists.push(item);
+            break;
+          case "cartStore":
+            state.cartStore.push(item);
+            break;
+          default:
+          // default code block
+        }
+        console.log("Item added:", action.payload, field);
       })
       .addCase(addToUserArray.rejected, (state, action) => {
-        state.loading = false;
+        state.load = false;
         state.error = action.payload;
+      });
+    builder
+      .addCase(removeFromUserArray.pending, (state) => {
+        state.load = true;
+      })
+      .addCase(removeFromUserArray.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.load = false;
+        const { field, item } = action.payload;
+        switch (field) {
+          case "wishlists":
+            state.wishlists = state.wishlists.filter((p) => p !== item);
+            break;
+          case "cartStore":
+            state.cartStore = state.cartStore.filter((p) => p !== item);
+            break;
+          default:
+          // default code block
+        }
+      })
+      .addCase(removeFromUserArray.rejected, (state, action) => {
+        state.load = false;
       });
   },
 });

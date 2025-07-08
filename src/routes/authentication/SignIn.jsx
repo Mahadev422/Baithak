@@ -18,6 +18,8 @@ const SignIn = () => {
       dispatch(syncUserToFirestore(user));
     } catch (err) {
       console.error("Google sign-in error", err.message);
+    } finally {
+      window.location.href = '/';
     }
   };
   useEffect(() => {

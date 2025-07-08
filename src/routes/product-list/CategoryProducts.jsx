@@ -15,7 +15,7 @@ const CategoryPorducts = () => {
     : products.filter((product) => product.category.toLowerCase() === category);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
       {filteredProducts.length === 0 ? (
         <div className="col-span-full text-center text-gray-500 py-12 bg-white rounded-lg shadow">
           No products found.

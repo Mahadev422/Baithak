@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { addToUserArray, removeFromUserArray } from "../../store/fetch/auth";
 
-const ImageGallery = ({ images }) => {
+const ImageGallery = ({ images, id }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [wihslist, setWishlist] = useState(false);
+  const dispatch = useDispatch();
+  const { user, wishlists, load } = useSelector((state) => state.auth);
 
   const nextImage = () => {
     setSelectedImageIndex((prev) =>
@@ -24,15 +29,35 @@ const ImageGallery = ({ images }) => {
           <img
             src={images[selectedImageIndex]}
             alt={`Image ${selectedImageIndex + 1}`}
-            className="h-[400px] rounded-lg shadow-md"
+            className="h-[400px] rounded-lg"
           />
           <div className="absolute top-2 right-4 text-3xl p-2 rounded-full">
-            {true ? (
-              <button className="h-5 w-5 text-red-500">
+            {load ? (
+              "..."
+            ) : wishlists.includes(id) ? (
+              <button
+                onClick={() =>
+                  dispatch(
+                    removeFromUserArray({
+                      uid: user,
+                      field: "wishlists",
+                      item: id,
+                    })
+                  )
+                }
+                className="h-5 w-5 text-red-500"
+              >
                 <FaHeart />
               </button>
             ) : (
-              <button className="h-5 w-5">
+              <button
+                onClick={() =>
+                  dispatch(
+                    addToUserArray({ uid: user, field: "wishlists", item: id })
+                  )
+                }
+                className="h-5 w-5"
+              >
                 <FaRegHeart />
               </button>
             )}
