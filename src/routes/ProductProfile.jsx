@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import BuyCart from "../components/product-profile/BuyCart";
 import ProductPricing from "../components/product-profile/ProductPricing";
+import Spinner from "../components/Spinner";
 
 const ProductProfile = () => {
   const [quantity, setQuantity] = useState(1);
@@ -19,7 +20,7 @@ const ProductProfile = () => {
     setProduct(data)
   },[products]);
 
-  if(!product) return <p>Loading...</p>
+  if(!product) return <Spinner />
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">

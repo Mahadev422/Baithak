@@ -1,5 +1,11 @@
 import { FiTrash2, FiPlus, FiMinus } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromUserArray } from "../../store/fetch/auth";
+import { showNotification } from "../../store/slices/notificationSlice";
+
 const CartItems = ({ items, quantity, setQuantity }) => {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   return (
     <div className="flex-1 space-y-4">
       {items.map((item) => (
@@ -20,18 +26,41 @@ const CartItems = ({ items, quantity, setQuantity }) => {
 
           <div className="flex items-center gap-1 sm:gap-2 my-2 sm:my-0">
             <h1>Quantity</h1>
-            <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="p-1 sm:p-2 bg-gray-200 rounded hover:bg-gray-300">
+            <button
+              onClick={() => setQuantity(Math.max(1, quantity - 1))}
+              className="p-1 sm:p-2 bg-gray-200 rounded hover:bg-gray-300"
+            >
               <FiMinus />
             </button>
             <span className="w-6 text-center text-sm sm:text-base">
               {quantity}
             </span>
-            <button onClick={() => setQuantity(Math.min(4, quantity + 1))} className="p-1 sm:p-2 bg-gray-200 rounded hover:bg-gray-300">
+            <button
+              onClick={() => setQuantity(Math.min(4, quantity + 1))}
+              className="p-1 sm:p-2 bg-gray-200 rounded hover:bg-gray-300"
+            >
               <FiPlus />
             </button>
           </div>
 
-          <button className="p-2 absolute top-0 right-0 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-full">
+          <button
+            onClick={() => {
+              dispatch(
+                removeFromUserArray({
+                  uid: user,
+                  field: "cartStore",
+                  item: item.id,
+                })
+              );
+              dispatch(
+                showNotification({
+                  message: "Removed from cart",
+                  type: "success",
+                })
+              );
+            }}
+            className="p-2 absolute top-0 right-0 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-full"
+          >
             <FiTrash2 />
           </button>
         </div>

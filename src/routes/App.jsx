@@ -5,22 +5,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProducts } from "../store/fetch/addProduct";
 import { checkAuthStatus, getUserDetails } from "../store/fetch/auth";
+import Spinner from "../components/Spinner";
+import NotificationBanner from "../components/loader/NotificationBanner";
 
 function App() {
-  const { user, loading } = useSelector(state => state.auth);
+  const { user, loading } = useSelector((state) => state.auth);
+  const { show } = useSelector((state) => state.notification);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(checkAuthStatus());
     dispatch(getProducts());
   }, []);
   useEffect(() => {
-    if(user) dispatch(getUserDetails(user));
-  },[user])
-  if(loading) return <p>Loading...</p>
+    if (user) dispatch(getUserDetails(user));
+  }, [user]);
+
+  if (loading) return <Spinner />;
   return (
     <div className="min-h-screen min-w-screen bg-gray-100 remove-scrollbar">
       <Header />
       <main className="mt-15">
+        {show && <NotificationBanner />}
         <Outlet />
       </main>
       <Footer />

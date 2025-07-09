@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const CartSummary = ({ items, quantity }) => {
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * quantity,
@@ -32,9 +34,9 @@ const CartSummary = ({ items, quantity }) => {
           <span>Total</span>
           <span>₹ {total}</span>
         </div>
-        <button className="mt-6 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 font-semibold text-sm sm:text-base">
+        <Link to='/admin/payment' className="mt-6 flex justify-center bg-blue-600 text-white py-2 rounded hover:bg-blue-700 font-semibold text-sm sm:text-base">
           Proceed to Checkout
-        </button>
+        </Link>
       </div>
     </div>
   );

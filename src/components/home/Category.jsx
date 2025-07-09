@@ -1,10 +1,11 @@
+import ProductSkeleton from "../loader/ProductSkeleton";
 import Product from "../Product";
 import { useSelector } from "react-redux";
 
 const Category = ({ cat }) => {
   const { products, loading } = useSelector((state) => state.addProduct);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <ProductSkeleton />;
   const filteredProducts = products.filter(
     (product) => product.category.toLowerCase() === cat
   );

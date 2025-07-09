@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addToUserArray, removeFromUserArray } from "../store/fetch/auth";
+import { showNotification } from "../store/slices/notificationSlice";
 
 const Product = ({ product }) => {
   const { wishlists, load, user } = useSelector((state) => state.auth);
@@ -18,26 +19,42 @@ const Product = ({ product }) => {
           "..."
         ) : wishlists.includes(product.id) ? (
           <button
-            onClick={() =>
+            onClick={() => {
               dispatch(
                 removeFromUserArray({
                   uid: user,
                   field: "wishlists",
                   item: product.id,
                 })
-              )
-            }
+              );
+              dispatch(
+                showNotification({
+                  message: `Removed from wishlist--${product.name}`,
+                  type: "success",
+                })
+              );
+            }}
             className="h-5 w-5 text-red-500"
           >
             <FaHeart />
           </button>
         ) : (
           <button
-            onClick={() =>
+            onClick={() => {
               dispatch(
-                addToUserArray({ uid: user, field: "wishlists", item: product.id })
-              )
-            }
+                addToUserArray({
+                  uid: user,
+                  field: "wishlists",
+                  item: product.id,
+                })
+              );
+              dispatch(
+                showNotification({
+                  message: `Removed from wishlist--${product.name}`,
+                  type: "success",
+                })
+              );
+            }}
             className="h-5 w-5"
           >
             <FaRegHeart />

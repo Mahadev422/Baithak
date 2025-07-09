@@ -3,12 +3,17 @@ import Product from "../../components/Product";
 import { mockProducts } from "../../data";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Loader from "../../components/Loader";
+import ProductSkeleton from "../../components/loader/ProductSkeleton";
 
 const CategoryPorducts = () => {
   const { products, loading } = useSelector((state) => state.addProduct);
   const { category } = useParams();
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+    {[1,2,3,4,5].map((idx) => <ProductSkeleton key={idx} />)}
+  </div>);
   
   const filteredProducts = !category
     ? products

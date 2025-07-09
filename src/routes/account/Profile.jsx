@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import AddressForm from "../../components/account/AddressForm";
+import AddressCard from "../../components/account/AddressCard";
 
 const Profile = () => {
-  const { userData } = useSelector((state) => state.auth);
+  const { userData, address } = useSelector((state) => state.auth);
   const [add, setAdd] = useState(false);
 
   if (!userData) return <p>Loading...</p>;
@@ -69,19 +70,9 @@ const Profile = () => {
             Address
           </label>
           <div className="flex flex-col gap-2">
-            {userData.address.length !== 0 &&
-              userData.address.map((add, idx) => (
-                <div
-                  key={idx}
-                  className="w-full relative px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-700 font-medium"
-                >
-                  <span className="absolute top-2 right-2">edit</span>
-                  {add.locality}, {add.pin},
-                  <br />
-                  {add.landmark === "" ? "" : add.landmark + ","} {add.city}
-                  <br />
-                  {add.state}, India
-                </div>
+            {address.length !== 0 &&
+              address.map((add, idx) => (
+               <AddressCard key={idx} address={add} uid={userData.id} />
               ))}
           </div>
         </div>

@@ -13,6 +13,7 @@ import Orders from "./routes/account/Orders";
 import Profile from "./routes/account/Profile";
 import SignIn from "./routes/authentication/SignIn";
 import ProtectedRoute from "./routes/authentication/ProtectedRoute"; // ✅ import
+import PaymentPage from "./routes/authentication/PaymentPage";
 
 export const Router = createBrowserRouter([
   {
@@ -56,5 +57,6 @@ export const Router = createBrowserRouter([
   { path: "/sign-in", element: <SignIn /> },
 
   // 🔐 Optional: Admin Route Guard
-  { path: "/admin/add-product", element: <ProductForm /> }, // You can wrap this too if needed
+  { path: "/admin/add-product", element: <ProductForm /> },
+  { path: 'admin/payment', element: <PaymentPage />}
 ]);

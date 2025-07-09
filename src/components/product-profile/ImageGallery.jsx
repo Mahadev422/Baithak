@@ -3,12 +3,13 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addToUserArray, removeFromUserArray } from "../../store/fetch/auth";
+import { showNotification } from "../../store/slices/notificationSlice";
 
 const ImageGallery = ({ images, id }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [wihslist, setWishlist] = useState(false);
   const dispatch = useDispatch();
   const { user, wishlists, load } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(false);
 
   const nextImage = () => {
     setSelectedImageIndex((prev) =>
@@ -21,6 +22,9 @@ const ImageGallery = ({ images, id }) => {
       prev === 0 ? images.length - 1 : prev - 1
     );
   };
+  const handleLoading = () => {
+    setLoading(true);
+  }
   return (
     <div className="lg:w-1/2">
       <div className="relative">
@@ -31,30 +35,42 @@ const ImageGallery = ({ images, id }) => {
             alt={`Image ${selectedImageIndex + 1}`}
             className="h-[400px] rounded-lg"
           />
-          <div className="absolute top-2 right-4 text-3xl p-2 rounded-full">
-            {load ? (
+          <div onClick={handleLoading} className="absolute top-2 right-4 text-3xl p-2 rounded-full">
+            {load && loading ? (
               "..."
             ) : wishlists.includes(id) ? (
               <button
-                onClick={() =>
+                onClick={() => {
                   dispatch(
                     removeFromUserArray({
                       uid: user,
                       field: "wishlists",
                       item: id,
                     })
-                  )
-                }
+                  );
+                  dispatch(
+                    showNotification({
+                      message: "Removed from wishlist",
+                      type: "success",
+                    })
+                  );
+                }}
                 className="h-5 w-5 text-red-500"
               >
                 <FaHeart />
               </button>
             ) : (
               <button
-                onClick={() =>
+                onClick={() =>{
                   dispatch(
-                    addToUserArray({ uid: user, field: "wishlists", item: id })
-                  )
+                    addToUserArray({
+                      uid: user,
+                      field: "wishlists",
+                      item: id,
+                    })
+                  );
+                  dispatch(showNotification({message: 'Added to wishlist', type: 'success'}))
+                }
                 }
                 className="h-5 w-5"
               >

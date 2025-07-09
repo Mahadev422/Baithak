@@ -32,9 +32,9 @@ export const checkAuthStatus = createAsyncThunk(
 export const syncUserToFirestore = createAsyncThunk(
   "auth/syncUserToFirestore",
   async (user, thunkAPI) => {
-    if (typeof user !== 'string' || user.trim() === '') {
-        return rejectWithValue('Invalid user ID');
-      }
+    if (typeof user !== "string" || user.trim() === "") {
+      return rejectWithValue("Invalid user ID");
+    }
     try {
       const userRef = doc(db, "users", user.uid);
       const userSnap = await getDoc(userRef);
@@ -63,9 +63,9 @@ export const syncUserToFirestore = createAsyncThunk(
 export const getUserDetails = createAsyncThunk(
   "auth/getUserById",
   async (uid, { rejectWithValue }) => {
-    if (typeof uid !== 'string' || uid.trim() === '') {
-        return rejectWithValue('Invalid user ID');
-      }
+    if (typeof uid !== "string" || uid.trim() === "") {
+      return rejectWithValue("Invalid user ID");
+    }
     try {
       const userRef = doc(db, "users", uid);
       const userSnap = await getDoc(userRef);
@@ -91,6 +91,10 @@ export const getUserDetails = createAsyncThunk(
 export const addToUserArray = createAsyncThunk(
   "user/addToUserArray",
   async ({ uid, field, item }, { rejectWithValue }) => {
+    if (typeof uid !== "string" || uid.trim() === "") {
+      window.location.href = "/sign-in";
+      return rejectWithValue("Invalid user ID");
+    }
     try {
       const userRef = doc(db, "users", uid);
       await updateDoc(userRef, {
@@ -107,6 +111,9 @@ export const addToUserArray = createAsyncThunk(
 export const removeFromUserArray = createAsyncThunk(
   "user/removeFromUserArray",
   async ({ uid, field, item }, { rejectWithValue }) => {
+    if (typeof uid !== "string" || uid.trim() === "") {
+      return rejectWithValue("Invalid user ID");
+    }
     try {
       const userRef = doc(db, "users", uid);
       await updateDoc(userRef, {
