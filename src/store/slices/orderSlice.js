@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { addOrder, getOrders } from "../fetch/order";
 
 const initialState = {
-  orders: null,
+  orders: [],
   loading: false,
   error: null,
   orderItem: null,

@@ -13,8 +13,8 @@ const statusStyles = {
 
 const Orders = () => {
   const [expandedOrder, setExpandedOrder] = useState(null);
-  const { orders, loading } = useSelector(state => state.order);
-  const { user } = useSelector(state => state.auth);
+  const { orders, loading } = useSelector((state) => state.order);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const toggleOrder = (orderId) => {
@@ -22,14 +22,17 @@ const Orders = () => {
   };
 
   useEffect(() => {
-    if(!orders) dispatch(getOrders(user));
-  },[orders]);
+    dispatch(getOrders(user));
+    console.log(user)
+  }, [0]);
 
-if(loading) return <Spinner />
+  if (loading) return <Spinner />;
   return (
     <div>
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Order History</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+          Order History
+        </h2>
       </div>
 
       <div className="bg-white dark:bg-gray-900 shadow-sm rounded-lg overflow-hidden">
@@ -89,9 +92,7 @@ if(loading) return <Spinner />
                   </div>
                 </div>
 
-                {expandedOrder === order.id && (
-                 <OrderDetails order={order} />
-                )}
+                {expandedOrder === order.id && <OrderDetails order={order} />}
               </div>
             ))}
           </div>
