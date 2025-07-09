@@ -1,14 +1,39 @@
-export const DummyPages = [
-  <div className="flex flex-col w-screen items-center justify-center">
-    <img className="p-1" src="/slide/slide1.jpg" alt="" />
-  </div>,
-  <div className="flex flex-col w-screen items-center justify-center">
-    <img className="p-1" src="/slide/slide2.jpg" alt="" />
-  </div>,
-  <div className="flex flex-col w-screen items-center justify-center">
-    <img className="p-1" src="/slide/slide1.jpg" alt="" />
-  </div>,
-];
+export const slides = [
+    {
+      id: 1,
+      title: "Get Same day Delivery",
+      subtitle: "on orders above $15",
+      buttonText: "Shop Now",
+      bgColor: "bg-gradient-to-br from-green-400 to-green-500",
+      textColor: "text-black",
+      buttonColor: "bg-green-200 hover:bg-green-100 text-green-800",
+      icon: <FaTruck className="w-12 h-12 md:w-16 md:h-16 text-white opacity-20 absolute top-4 right-4" />,
+      image: "https://i.ibb.co/0RNG2HML/Whats-App-Image-2025-07-04-at-09-52-54-dfc71131.jpg"
+    },
+    {
+      id: 2,
+      title: "Free Shipping",
+      subtitle: "on orders above $50",
+      buttonText: "Order Now",
+      bgColor: "bg-gradient-to-br from-blue-400 to-blue-600",
+      textColor: "text-white",
+      buttonColor: "bg-blue-200 hover:bg-blue-100 text-blue-800",
+      icon: <FaShoppingBag className="w-12 h-12 md:w-16 md:h-16 text-white opacity-20 absolute top-4 right-4" />,
+      image: "https://i.ibb.co/hRsp9Tq4/Whats-App-Image-2025-07-04-at-09-50-44-bdb9f3cd.jpg"
+    },
+    {
+      id: 3,
+      title: "Premium Quality",
+      subtitle: "guaranteed satisfaction",
+      buttonText: "Explore",
+      bgColor: "bg-gradient-to-br from-purple-400 to-purple-600",
+      textColor: "text-white",
+      buttonColor: "bg-purple-200 hover:bg-purple-100 text-purple-800",
+      icon: <FaStar className="w-12 h-12 md:w-16 md:h-16 text-white opacity-20 absolute top-4 right-4" />,
+      image: "https://i.ibb.co/0RNG2HML/Whats-App-Image-2025-07-04-at-09-52-54-dfc71131.jpg"
+    }
+  ];
+
 
 export const mockProducts = [
   {

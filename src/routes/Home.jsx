@@ -1,10 +1,10 @@
 import AllProducts from '../components/home/AllProducts';
-import SlidingPage from '../components/home/SlidingPage';
+import SlidingBanner from '../components/home/SlidingBanner';
 
 const Home = () => {
   return (
     <div>
-        <SlidingPage />
+        <SlidingBanner />
         <AllProducts />
     </div>
   )
