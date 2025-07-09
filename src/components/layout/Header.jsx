@@ -6,7 +6,7 @@ const Header = () => {
   const { user, loading } = useSelector(state => state.auth)
 
   return (
-    <header className="w-full fixed h-[56px] z-50 top-0 flex items-center justify-between px-2 bg-white shadow-md">
+    <header className="w-full fixed h-[56px] z-50 top-0 flex items-center justify-between px-2 bg-white dark:bg-gray-800 shadow-md">
       {/* Left: App Name */}
       <Link to="/">
         <img

@@ -9,7 +9,7 @@ const AllProducts = () => {
       {categories.map((cat, idx) => (
         <div key={idx} className="mb-10">
           <span className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-semibold text-gray-700">{cat.name}</h2>
+            <h2 className="text-2xl font-semibold text-gray-700 dark:text-white">{cat.name}</h2>
             <Link to={`products/${cat.name.toLocaleLowerCase()}`} className="text-sm text-blue-600 p-1 px-2 rounded hover:bg-blue-200">
               View All
             </Link>

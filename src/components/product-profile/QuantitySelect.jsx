@@ -13,7 +13,7 @@ const QuantitySelect = ({ setQuantity, quantity}) => {
         <div className="flex items-center border border-gray-300 rounded-md">
           <button
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="p-2 bg-gray-100 rounded-l-md  text-gray-600 hover:bg-gray-200"
+            className="p-2 bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-l-md hover:bg-gray-200"
             disabled={quantity <= 1}
           >
             <FaMinus className="h-full" />
@@ -30,7 +30,7 @@ const QuantitySelect = ({ setQuantity, quantity}) => {
             onClick={() =>
               setQuantity(Math.min(4,quantity + 1))
             }
-            className="p-2 bg-gray-100 rounded-r-md text-gray-600 hover:bg-gray-200"
+            className="p-2 bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-r-md hover:bg-gray-200"
           >
             <FaPlus className="h-full" />
           </button>

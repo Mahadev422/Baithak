@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
 import Product from "../../components/Product";
-import { mockProducts } from "../../data";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Loader from "../../components/Loader";
 import ProductSkeleton from "../../components/loader/ProductSkeleton";
 
 const CategoryPorducts = () => {
@@ -22,7 +19,7 @@ const CategoryPorducts = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
       {filteredProducts.length === 0 ? (
-        <div className="col-span-full text-center text-gray-500 py-12 bg-white rounded-lg shadow">
+        <div className="col-span-full text-center text-gray-500 py-12 bg-white dark:bg-gray-800 rounded-lg shadow">
           No products found.
         </div>
       ) : (

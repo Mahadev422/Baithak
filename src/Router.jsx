@@ -14,6 +14,7 @@ import Profile from "./routes/account/Profile";
 import SignIn from "./routes/authentication/SignIn";
 import ProtectedRoute from "./routes/authentication/ProtectedRoute"; // ✅ import
 import PaymentPage from "./routes/authentication/PaymentPage";
+import CategoryPorducts from "./routes/product-list/CategoryProducts";
 
 export const Router = createBrowserRouter([
   {
@@ -38,6 +39,7 @@ export const Router = createBrowserRouter([
           { path: "wishlists", element: <Wishlists /> },
           { path: "settings", element: <Settings /> },
           { path: "notifications", element: <Notifications /> },
+          { path: "admin/payment", element: <PaymentPage /> },
         ],
       },
 
@@ -46,8 +48,8 @@ export const Router = createBrowserRouter([
         path: "products",
         element: <ProductLists />,
         children: [
-          { index: true, element: <div>All</div> },
-          { path: ":category", element: <div>Category</div> },
+          { index: true, element: <CategoryPorducts /> },
+          { path: ":category", element: <CategoryPorducts /> },
         ],
       },
     ],
@@ -58,5 +60,4 @@ export const Router = createBrowserRouter([
 
   // 🔐 Optional: Admin Route Guard
   { path: "/admin/add-product", element: <ProductForm /> },
-  { path: 'admin/payment', element: <PaymentPage />}
 ]);

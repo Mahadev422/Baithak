@@ -83,21 +83,29 @@ const ImageGallery = ({ images, id }) => {
         {/* Navigation Arrows */}
         {images.length > 1 && (
           <>
-            <button
-              onClick={prevImage}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2 shadow-md hover:bg-white"
-              aria-label="Previous image"
-            >
-              <IoIosArrowBack className="h-6 w-6" />
-            </button>
-            <button
-              onClick={nextImage}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2 shadow-md hover:bg-white"
-              aria-label="Next image"
-            >
-              <IoIosArrowForward className="h-6 w-6" />
-            </button>
-          </>
+  <button
+    onClick={prevImage}
+    className="absolute left-2 top-1/2 -translate-y-1/2 
+               transition-all duration-300 ease-in-out 
+               bg-gray-100/80 dark:bg-gray-800 
+               rounded p-2 shadow-md hover:rounded-full"
+    aria-label="Previous image"
+  >
+    <IoIosArrowBack className="h-6 w-6" />
+  </button>
+
+  <button
+    onClick={nextImage}
+    className="absolute right-2 top-1/2 -translate-y-1/2 
+               transition-all duration-300 ease-in-out 
+               bg-gray-100/80 dark:bg-gray-800 
+               rounded p-2 shadow-md hover:rounded-full"
+    aria-label="Next image"
+  >
+    <IoIosArrowForward className="h-6 w-6" />
+  </button>
+</>
+
         )}
       </div>
 

@@ -22,9 +22,9 @@ function App() {
 
   if (loading) return <Spinner />;
   return (
-    <div className="min-h-screen min-w-screen bg-gray-100 remove-scrollbar">
+    <div className="min-h-screen min-w-screen dark:bg-gray-900 text-black dark:text-white bg-gray-100 remove-scrollbar">
       <Header />
-      <main className="mt-15">
+      <main className="mt-14">
         {show && <NotificationBanner />}
         <Outlet />
       </main>

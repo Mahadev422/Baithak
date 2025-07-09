@@ -8,7 +8,7 @@ const UserDashboard = () => {
   const [activeTab, setActiveTab] = useState('personal-info');
   const location = useLocation()
   const path = location.pathname;
-  const { userData, loading } = useSelector(state => state.auth);
+  const { userData } = useSelector(state => state.auth);
 
   useEffect(() => {
     setActiveTab(path)
@@ -30,7 +30,7 @@ const UserDashboard = () => {
            <MdEdit />
           </button>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800">{userData?.displayName}</h1>
+        <h1 className="text-2xl sm:text-3xl font-semibold">{userData?.displayName}</h1>
       </div>
 
       {/* Tabs Navigation */}
@@ -41,8 +41,8 @@ const UserDashboard = () => {
             to={tab === 'User' ? '' : tab.toLowerCase()}
             className={`px-4 py-2 rounded-md text-sm sm:text-base font-medium transition-colors ${
               activeTab === (tab === 'User' ? '/account' : '/account/'+tab.toLowerCase()) 
-                ? 'bg-blue-500 text-white' 
-                : 'text-gray-600 hover:bg-gray-100'
+                ? 'bg-blue-500 dark:bg-gray-700 text-white' 
+                : 'text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
             {tab}
@@ -52,7 +52,7 @@ const UserDashboard = () => {
 
       </div>
       {/* Tab Content */}
-      <div className="bg-white flex-3 rounded-lg shadow-sm p-6">
+      <div className="bg-white dark:bg-gray-800 flex-3 rounded-lg shadow-sm p-6">
         <Outlet />
       </div>
     </div>

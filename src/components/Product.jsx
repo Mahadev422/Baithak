@@ -13,7 +13,7 @@ const Product = ({ product }) => {
     ((product.originalPrice - product.price) * 100) / product.originalPrice;
 
   return (
-    <div className="bg-white rounded-xl h-[150px] hover:shadow-lg transition-all relative duration-200 p-2 flex gap-3">
+    <div className="bg-white dark:bg-gray-800 text-black rounded-xl h-[150px] hover:shadow-lg transition-all relative duration-200 p-2 flex gap-3">
       <div className="absolute m-1 text-xl text-gray-800 hover:scale-[1.2] rounded-full p-1">
         {load ? (
           "..."
@@ -70,7 +70,7 @@ const Product = ({ product }) => {
       </Link>
       <div className="flex flex-col justify-between flex-2">
         <div>
-          <h2 className="text-lg truncate font-semibold text-gray-800">
+          <h2 className="text-lg truncate dark:text-white font-semibold">
             {product.name}
           </h2>
         </div>
@@ -89,7 +89,7 @@ const Product = ({ product }) => {
           ))}
         </div>
         <div className="flex gap-3 items-center">
-          <span className="text-gray-400 line-through text-base">
+          <span className="line-through dark:text-gray-50 text-base">
             ₹ {product.originalPrice}
           </span>
           <span className="text-red-600 font-semibold bg-red-100 px-2 py-0.5 rounded text-xs">

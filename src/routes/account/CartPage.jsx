@@ -1,40 +1,62 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import CartSummary from "../../components/account/CartSummary";
-import CartItems from "../../components/account/CartItems";
-import { useSelector } from "react-redux";
-
-// const cartItems = [
-//   {
-//     id: 1,
-//     name: "Wireless Headphones",
-//     price: 59.99,
-//     quantity: 2,
-//     image:
-//       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=200&q=80",
-//   },
-//   {
-//     id: 2,
-//     name: "Smart Watch",
-//     price: 99.99,
-//     quantity: 1,
-//     image:
-//       "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=200&q=80",
-//   },
-// ];
+import CartItem from "../../components/account/CartItem";
+import { storeOrder } from "../../store/slices/orderSlice";
 
 const CartPage = () => {
-  const { cartStore } = useSelector((state) => state.auth);
-  const { products } = useSelector((state) => state.addProduct);
-  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  //console.log(cartStore, products);
+  const { cartStore, user } = useSelector((state) => state.auth);
+  const { products } = useSelector((state) => state.addProduct);
+
+  const [quantities, setQuantities] = useState({});
 
   const cartItems = products.filter((item) => cartStore.includes(item.id));
-  if (!cartItems) return <p>Loading</p>;
+
+  const updateQuantity = (id, delta) => {
+    setQuantities((prev) => {
+      const newQty = Math.min(4, Math.max(1, (prev[id] || 1) + delta));
+      return { ...prev, [id]: newQty };
+    });
+  };
+
+  const subtotal = cartItems.reduce((acc, item) => {
+    const qty = quantities[item.id] || 1;
+    return acc + item.price * qty;
+  }, 0);
+
+  const shipping = 0;
+  const total = subtotal + shipping;
+
+  const handleCheckout = () => {
+    const orderItem = {
+      userId: user,
+      date: new Date().toISOString().split("T")[0],
+      status: "Processing",
+      total: total.toFixed(2),
+      items: cartItems.map((item) => ({
+        productId: item.id,
+        name: item.name,
+        quantity: quantities[item.id] || 1,
+        price: item.price.toFixed(2),
+      })),
+      tracking: `TRACK-${Math.floor(1000000000 + Math.random() * 9000000000)}`,
+      deliveryDate: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .split("T")[0],
+    };
+    dispatch(storeOrder(orderItem));
+    navigate("/admin/payment");
+  };
+
+  if (!cartItems) return <p>Loading...</p>;
 
   return (
     <div className="px-4 py-6 md:px-8 md:py-10">
-      <div className="mx-auto max-w-6xl bg-white rounded-lg shadow-md p-4 sm:p-6">
+      <div className="mx-auto max-w-6xl bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sm:p-6">
         <h2 className="text-xl sm:text-2xl font-bold mb-6">Shopping Cart</h2>
 
         {cartItems.length === 0 ? (
@@ -44,15 +66,19 @@ const CartPage = () => {
         ) : (
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Cart Items */}
-
-            <CartItems
-              items={cartItems}
-              quantity={quantity}
-              setQuantity={setQuantity}
-            />
+            <div className="flex-1 space-y-4">
+              {cartItems.map((item) => (
+                <CartItem key={item.id} item={item} updateQuantity={updateQuantity} quantities={quantities} />
+              ))}
+            </div>
 
             {/* Summary Section */}
-            <CartSummary items={cartItems} quantity={quantity} />
+            <CartSummary
+              handleCheckout={handleCheckout}
+              subtotal={subtotal}
+              shipping={shipping}
+              total={total}
+            />
           </div>
         )}
       </div>

@@ -33,10 +33,10 @@ const ProductProfile = () => {
           <div className="space-y-6">
             {/* Product Title */}
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+              <h1 className="text-2xl font-bold sm:text-3xl">
                 {product.name}
               </h1>
-              <p className="text-gray-500 text-sm mt-1">
+              <p className="text-sm mt-1">
                 {product.category}
               </p>
             </div>
@@ -59,7 +59,7 @@ const ProductProfile = () => {
                   </svg>
                 ))}
               </div>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm">
                 {product.rating} ({product.reviews} reviews)
               </p>
             </div>
@@ -67,7 +67,7 @@ const ProductProfile = () => {
             {/* Price & Delivery */}
             <ProductPricing product={product} />
             {/* Description */}
-            <p className="text-gray-700">{product.description}</p>
+            <p>{product.description}</p>
 
             {/* Size Selector */}
             <SizeSelect sizes={product.sizes} />
