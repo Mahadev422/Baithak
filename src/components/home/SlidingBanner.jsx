@@ -20,7 +20,7 @@ const SlidingBanner = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [currentSlide]);

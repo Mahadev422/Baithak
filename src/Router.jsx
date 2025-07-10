@@ -3,7 +3,6 @@ import App from "./routes/App";
 import Home from "./routes/Home";
 import UserDashboard from "./routes/account/UserDashboard";
 import CartPage from "./routes/account/CartPage";
-import Settings from "./routes/account/Settings";
 import Notifications from "./routes/Notifications";
 import ProductProfile from "./routes/ProductProfile";
 import Wishlists from "./routes/account/Wishlists";
@@ -15,6 +14,7 @@ import SignIn from "./routes/authentication/SignIn";
 import ProtectedRoute from "./routes/authentication/ProtectedRoute"; // ✅ import
 import PaymentPage from "./routes/authentication/PaymentPage";
 import CategoryPorducts from "./routes/product-list/CategoryProducts";
+import Contact from "./routes/account/ContactUs";
 
 export const Router = createBrowserRouter([
   {
@@ -37,11 +37,13 @@ export const Router = createBrowserRouter([
           },
           { path: "cart", element: <CartPage /> },
           { path: "wishlists", element: <Wishlists /> },
-          { path: "settings", element: <Settings /> },
           { path: "notifications", element: <Notifications /> },
           { path: "admin/payment", element: <PaymentPage /> },
+          { path: "contact-us", element: <Contact /> },
         ],
       },
+
+      
 
       { path: "/products/:category/:id", element: <ProductProfile /> },
       {

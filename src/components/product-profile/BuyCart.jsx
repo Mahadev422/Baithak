@@ -13,16 +13,14 @@ const BuyCart = ({ id }) => {
   return (
     <div className="flex flex-row gap-3">
       <span className="transition-all h-10 w-10 duration-300">
-        {load ? (
-          "..."
-        ) : cartStore.includes(id) ? (
+        {cartStore.includes(id) ? (
           <button
             type="button"
             onClick={() => {
               dispatch(
                 removeFromUserArray({ uid: user, field: "cartStore", item: id })
               );
-              dispatch(
+              user && dispatch(
                 showNotification({
                   message: "Remove from cart",
                   type: "success",
@@ -41,7 +39,7 @@ const BuyCart = ({ id }) => {
               dispatch(
                 addToUserArray({ uid: user, field: "cartStore", item: id })
               );
-              dispatch(
+              user && dispatch(
                 showNotification({ message: "Added to cart", type: "success" })
               );
             }}

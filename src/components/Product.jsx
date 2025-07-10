@@ -15,9 +15,7 @@ const Product = ({ product }) => {
   return (
     <div className="bg-white dark:bg-gray-800 text-black rounded-xl h-[150px] hover:shadow-lg transition-all relative duration-200 p-2 flex gap-3">
       <div className="absolute m-1 text-xl text-gray-800 hover:scale-[1.2] rounded-full p-1">
-        {load ? (
-          "..."
-        ) : wishlists.includes(product.id) ? (
+        {wishlists.includes(product.id) ? (
           <button
             onClick={() => {
               dispatch(
@@ -27,7 +25,7 @@ const Product = ({ product }) => {
                   item: product.id,
                 })
               );
-              dispatch(
+              user && dispatch(
                 showNotification({
                   message: `Removed from wishlist--${product.name}`,
                   type: "success",
@@ -48,7 +46,7 @@ const Product = ({ product }) => {
                   item: product.id,
                 })
               );
-              dispatch(
+              user && dispatch(
                 showNotification({
                   message: `Removed from wishlist--${product.name}`,
                   type: "success",

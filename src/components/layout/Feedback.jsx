@@ -1,11 +1,18 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { sendFeedback } from "../../store/fetch/feedback";
+import { showNotification } from '../../store/slices/notificationSlice'
 
 const Feedback = () => {
   const [selected, setSelected] = useState(null);
+  const { loading } = useSelector(state => state.feedback);
+  const dispatch = useDispatch()
   const handleFeedback = (e) => {
     e.preventDefault();
     const feedbackText = e.target[2].value;
-    console.log(selected, feedbackText)
+    dispatch(sendFeedback({type: selected || 'positive', message: feedbackText}));
+    dispatch(showNotification({type: 'success', message: 'Feedback Sent Successfully!!'}))
+    e.target[2].value = '';
   };
 
   return (
@@ -42,7 +49,7 @@ const Feedback = () => {
         />
         <input
           type="submit"
-          value="Submit"
+          value={loading ? 'Sending...' : 'Submit'}
           aria-label="Submit feedback"
           className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 font-semibold shadow transition"
         />
